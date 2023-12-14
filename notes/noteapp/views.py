@@ -4,7 +4,6 @@ from .forms import NoteForm
 from .models import Tag
 from .models import Note
 
-
 # Create your views here.
 def main(request):
     notes = Note.objects.all()
