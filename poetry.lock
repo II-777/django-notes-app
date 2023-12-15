@@ -30,6 +30,18 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "pillow"
+version = "10.1.0"
+description = "Python Imaging Library (Fork)"
+category = "main"
+optional = false
+python-versions = ">=3.8"
+
+[package.extras]
+docs = ["furo", "olefile", "sphinx (>=2.4)", "sphinx-copybutton", "sphinx-inline-tabs", "sphinx-removed-in", "sphinxext-opengraph"]
+tests = ["check-manifest", "coverage", "defusedxml", "markdown2", "olefile", "packaging", "pyroma", "pytest", "pytest-cov", "pytest-timeout"]
+
+[[package]]
 name = "psycopg2-binary"
 version = "2.9.9"
 description = "psycopg2 - Python-PostgreSQL Database Adapter"
@@ -69,11 +81,12 @@ python-versions = ">=2"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "ea1d2530671f8ffa13be1a8761cc33bc3252367c30b4fe976f274aaa24f9855d"
+content-hash = "643a4cae9e8bee833c47a6789d310f94d80d174c5dd3bd74ddeb1f180e544689"
 
 [metadata.files]
 asgiref = []
 django = []
+pillow = []
 psycopg2-binary = []
 sqlparse = []
 typing-extensions = []
