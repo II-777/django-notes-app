@@ -5,7 +5,6 @@ from .models import Tag, Note
 
 
 # Create your views here.
-@login_required
 def main(request):
     notes = (
         Note.objects.filter(user=request.user).all()
@@ -16,23 +15,13 @@ def main(request):
 
 
 @login_required
-def set_done(request, note_id):
-    Note.objects.filter(pk=note_id, user=request.user).update(done=True)
-    return redirect(to="noteapp:main")
-
-
-@login_required
-def delete_note(request, note_id):
-    Note.objects.get(pk=note_id, user=request.user).delete()
-    return redirect(to="noteapp:main")
-
-
-@login_required
 def tag(request):
     if request.method == "POST":
         form = TagForm(request.POST)
         if form.is_valid():
-            form.save()
+            tag = form.save(commit=False)
+            tag.user = request.user
+            tag.save()
             return redirect(to="noteapp:main")
         else:
             return render(request, "noteapp/tag.html", {"form": form})
@@ -65,10 +54,17 @@ def note(request):
 
 @login_required
 def detail(request, note_id):
-    note = get_object_or_404(Note, pk=note_id)
+    note = get_object_or_404(Note, pk=note_id, user=request.user)
     return render(request, "noteapp/detail.html", {"note": note})
 
 
 @login_required
-def profile(request):
-    return render(request, "users/profile.html")
+def set_done(request, note_id):
+    Note.objects.filter(pk=note_id, user=request.user).update(done=True)
+    return redirect(to="noteapp:main")
+
+
+@login_required
+def delete_note(request, note_id):
+    Note.objects.get(pk=note_id, user=request.user).delete()
+    return redirect(to="noteapp:main")

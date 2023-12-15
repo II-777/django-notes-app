@@ -1,6 +1,5 @@
 from django.forms import ModelForm, CharField, TextInput
-from .models import Tag
-from .models import Note
+from .models import Tag, Note
 
 
 class TagForm(ModelForm):
